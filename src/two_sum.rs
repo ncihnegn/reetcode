@@ -22,10 +22,29 @@ pub fn two_sum_sorted(nums: &[i32], target: i32) -> Option<(usize, usize)> {
     None
 }
 
+pub struct TwoSum {
+    nums: Vec<i32>,
+}
+
+impl TwoSum {
+    pub fn new() -> Self {
+        TwoSum { nums: Vec::new() }
+    }
+
+    pub fn add(&mut self, input: i32) {
+        self.nums.push(input);
+    }
+
+    pub fn find(&self, value: i32) -> bool {
+        two_sum(&self.nums, value) != None
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::two_sum;
     use super::two_sum_sorted;
+    use super::TwoSum;
     #[test]
     fn example() {
         let nums = [2, 7, 11, 15];
@@ -46,5 +65,11 @@ mod test {
         assert_eq!(two_sum_sorted(&nums, 26), Some((2, 3)));
         assert_eq!(two_sum_sorted(&nums, 4), None);
 
+        let mut ds = TwoSum::new();
+        for i in &nums {
+            ds.add(*i);
+        }
+        assert_eq!(ds.find(9), true);
+        assert_eq!(ds.find(4), false);
     }
 }
