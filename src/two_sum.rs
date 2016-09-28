@@ -16,7 +16,7 @@ pub fn two_sum_sorted(nums: &[i32], target: i32) -> Option<(usize, usize)> {
         let remains = &nums[i+1..nums.len()];
         let r = remains.binary_search(&s);
         if r.is_ok() {
-            return Some((i, i + 1 + r.unwrap()));
+            return Some((i, i+1 + r.unwrap()));
         }
     }
     None

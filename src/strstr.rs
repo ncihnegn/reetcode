@@ -19,8 +19,8 @@ pub fn strstr(haystack: &str, needle: &str) -> Option<usize> {
             }
         }
         match ntruncated.iter().rposition(|x| *x == hbytes[skip + nbytes.len()-1]) {
-            Some(j) => skip = skip + nlen-1 - j,
-            None => skip = skip + nlen,
+            Some(j) => skip += nlen-1 - j,
+            None => skip += nlen,
         }
     }
     None

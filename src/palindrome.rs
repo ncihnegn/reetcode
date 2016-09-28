@@ -1,9 +1,8 @@
 pub fn is_palindrome(s: &str) -> bool {
     let mut chars = s.to_lowercase().chars().collect::<Vec<_>>();
     chars.retain(|&x| x.is_alphanumeric());
-    let orig = chars.iter().cloned().collect::<String>();
-    chars.reverse();
-    let rev = chars.into_iter().collect::<String>();
+    let orig = chars.clone().into_iter().collect::<String>();
+    let rev = chars.into_iter().rev().collect::<String>();
     orig == rev
 }
 
