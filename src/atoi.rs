@@ -18,15 +18,9 @@ pub fn atoi(s: &str) -> Option<i32> {
     let mut val: Option<i32> = None;
     while let Some(c) = chars.next() {
         if c.is_numeric() {
-            let (mul, overflow) = val.unwrap_or(0).overflowing_mul(10);
-            if overflow {
-                match sign {
-                    Sign::Positive => return Some(i32::MAX),
-                    Sign::Negative => return Some(i32::MIN)
-                }
-            }
-            let (add, overflow) = mul.overflowing_add(c.to_digit(10).unwrap() as i32);
-            if overflow {
+            let (mul, overflow_mul) = val.unwrap_or(0).overflowing_mul(10);
+            let (add, overflow_add) = mul.overflowing_add(c.to_digit(10).unwrap() as i32);
+            if overflow_mul || overflow_add {
                 match sign {
                     Sign::Positive => return Some(i32::MAX),
                     Sign::Negative => return Some(i32::MIN)
